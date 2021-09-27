@@ -2,10 +2,10 @@ package testMapper;
 
 import com.Application;
 import com.liang.mapper.UserMapper;
+import com.liang.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -35,4 +35,44 @@ public class UserMapperTest {
         String name = userMapper.getUserName();
         System.out.println(name);
     }
+
+    @Test
+    public void testAddUser() {
+        User user = new User();
+        user.setId(3);
+        user.setName("梁山伯");
+        user.setAge(67);
+        userMapper.addUser(user);
+
+    }
+
+    @Test
+    public void testDelUser() {
+        User user = new User();
+        user.setId(3);
+        userMapper.delUser(user);
+
+    }
+
+    @Test
+    public void testUpdateUser() {
+        User user = new User();
+        user.setId(3);
+        user.setName("蒋介石");
+        user.setAge(100);
+        userMapper.updateUser(user);
+
+    }
+
+    @Test
+    public void testLikeUser() {
+        System.out.println("模糊查询前：");
+        String like="石";
+        List list =userMapper.likeUser(like);
+        for (Object o : list) {
+            System.out.println("模糊查询："+o);
+        }
+        System.out.println("模糊查询后：");
+    }
+
 }

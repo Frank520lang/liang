@@ -5,5 +5,21 @@
     <select id="getUserName" resultType="java.lang.String">
         select name from user where id=1;
     </select>
+    <insert id="addUser" parameterType="com.liang.pojo.User">
+        insert into user(id,name,age) values(#{id},#{name},#{age});
+    </insert>
+    <delete id="delUser" parameterType="com.liang.pojo.User">
+        delete from user where id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="com.liang.pojo.User">
+        update user set name=#{name},age=#{age} where id=#{id};
+    </update>
+    <select id="likeUser" parameterType="string" resultType="com.liang.pojo.User">
+-- 拼接的形式会引入SQL注入，不安全
+--         select * from user where name like '%${stone}%';
+
+-- 相对来说安全
+            select * from user where name like concat('%',#{stone},'%');
+    </select>
 </mapper>
 
