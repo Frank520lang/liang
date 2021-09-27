@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    所有的mapper.xml文件都需要在这里注册-->
+    <mappers>
+        <mapper resource="com/liang/mapper/xml/UserMapper.xml"/>
+    </mappers>
+</configuration>

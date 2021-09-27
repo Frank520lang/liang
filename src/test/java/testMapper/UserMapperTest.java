@@ -19,13 +19,20 @@ import java.util.List;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= Application.class)
+@SpringBootTest(classes = Application.class)
 public class UserMapperTest {
     @Resource
     private UserMapper userMapper;
+
     @Test
-    public void test(){
-        List list =userMapper.selectList(null);
+    public void test() {
+        List list = userMapper.selectList(null);
         System.out.println(list);
+    }
+
+    @Test
+    public void testGetName() {
+        String name = userMapper.getUserName();
+        System.out.println(name);
     }
 }
