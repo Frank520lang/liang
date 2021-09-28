@@ -21,5 +21,21 @@
 -- 相对来说安全
             select * from user where name like concat('%',#{stone},'%');
     </select>
+    <!--    传多个参数-->
+    <!--    <select id="pageUser" resultType="com.liang.pojo.User">-->
+    <!--        select * from user limit #{startIndex},#{pageSize};-->
+    <!--    </select>-->
+    <!--    通过注解-->
+    <!--    <select id="pageUser" resultType="com.liang.pojo.User">-->
+    <!--        select * from user limit #{startIndex},#{pageSize};-->
+    <!--    </select>-->
+    <!--    参数为map集合-->
+    <!--    <select id="pageUser" parameterType="map" resultType="com.liang.pojo.User">-->
+    <!--        select * from user limit #{startIndex},#{pageSize};-->
+    <!--    </select>-->
+
+    <select id="pageUser" parameterType="list" resultType="com.liang.pojo.User">
+        select * from user limit #{list[0]},#{list[1]};
+    </select>
 </mapper>
 
