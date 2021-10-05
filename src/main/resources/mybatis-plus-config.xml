@@ -4,5 +4,7 @@
 <!--    所有的mapper.xml文件都需要在这里注册-->
     <mappers>
         <mapper resource="com/liang/mapper/xml/UserMapper.xml"/>
+        <mapper resource="com/liang/mapper/xml/StudentMapper.xml"/>
+        <mapper resource="com/liang/mapper/xml/TeacherMapper.xml"></mapper>
     </mappers>
 </configuration>

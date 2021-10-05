@@ -1,0 +1,10 @@
+mybatis学习笔记：
+作用：与mapper层的连接，与mysql等数据库的连接
+重点：
+    1.连接数据库的配置文件
+    2.mapper.xml文件
+        几个重要的参数：
+            namespace：与接口名相同（才能映射成功）
+            id：与对应接口函数名一致
+            parameterType：函数的传参（基本数据类型，对象，map集合）；取的时候#{对应的属性/key}
+            resultType:函数的返回值，基本数据类型，对象，list集合（里面的对象），map集合

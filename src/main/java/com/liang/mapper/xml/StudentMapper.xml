@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liang.mapper.StudentMapper">
+
+    <!--    &lt;!&ndash;    多对一多表查询的第一种方法&ndash;&gt;-->
+    <!--    <select id="getStudent" resultMap="studentMap">-->
+    <!--            select * from student;-->
+    <!--    </select>-->
+    <!--    <resultMap id="studentMap" type="com.liang.pojo.Student">-->
+    <!--        <id property="id" column="id"></id>-->
+    <!--        <result property="name" column="name"></result>-->
+    <!--        &lt;!&ndash;        单独处理&ndash;&gt;-->
+    <!--        <association property="teacher" column="tid" javaType="com.liang.pojo.Teacher" select="getTeacher">-->
+    <!--            &lt;!&ndash;            <result property="id" column="id"></result>&ndash;&gt;-->
+    <!--            &lt;!&ndash;            <result property="name" column="name"></result>&ndash;&gt;-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
+    <!--    &lt;!&ndash;    根据tid子查询&ndash;&gt;-->
+    <!--    <select id="getTeacher" resultType="com.liang.pojo.Teacher">-->
+    <!--        select * from teacher where id=#{tid};-->
+    <!--    </select>-->
+
+    <!--    多对一查询的第二种方法-->
+    <!--    嵌套查询-->
+
+    <select id="getStudent" resultMap="studentMap">
+        select s.id sid,s.name sname,t.id tid,t.name tname from student s,teacher t where s.tid=t.id;
+    </select>
+
+    <!--    column对应select语句查出的字段名-->
+    <resultMap id="studentMap" type="com.liang.pojo.Student">
+        <id property="id" column="sid"></id>
+        <result property="name" column="sname"></result>
+        <association property="teacher" javaType="com.liang.pojo.Teacher">
+            <id property="id" column="tid"></id>
+            <result property="name" column="tname"></result>
+        </association>
+    </resultMap>
+</mapper>
