@@ -78,6 +78,8 @@
                 </configuration>
             </plugin>
         </plugins>
+
+
 <!--        资源过滤器-->
         <resources>
             <resource>

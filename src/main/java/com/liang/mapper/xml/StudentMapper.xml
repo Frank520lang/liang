@@ -32,9 +32,13 @@
     <resultMap id="studentMap" type="com.liang.pojo.Student">
         <id property="id" column="sid"></id>
         <result property="name" column="sname"></result>
+        <!--        student嵌套teacher-->
+        <!--    association中的property要求是实体类中的一个属性-->
         <association property="teacher" javaType="com.liang.pojo.Teacher">
             <id property="id" column="tid"></id>
             <result property="name" column="tname"></result>
         </association>
     </resultMap>
+
+
 </mapper>

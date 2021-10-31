@@ -6,6 +6,11 @@ import lombok.Data;
 public class Student {
     private Integer id;
     private String name;
-    //    private Integer tid;
+
+    //一对多
+//    private Integer tid;
+
+    //多对一
+    //每个学生都必须关联一个老师
     private Teacher teacher;
 }
