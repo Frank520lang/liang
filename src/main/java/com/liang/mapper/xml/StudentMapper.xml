@@ -1,6 +1,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace对应mapper接口的接口名-->
 <mapper namespace="com.liang.mapper.StudentMapper">
 
     <!--    &lt;!&ndash;    多对一多表查询的第一种方法&ndash;&gt;-->
@@ -24,6 +25,7 @@
     <!--    多对一查询的第二种方法-->
     <!--    嵌套查询-->
 
+<!--id对应方法名，resultMap或者resultType对应方法的返回值-->
     <select id="getStudent" resultMap="studentMap">
         select s.id sid,s.name sname,t.id tid,t.name tname from student s,teacher t where s.tid=t.id;
     </select>

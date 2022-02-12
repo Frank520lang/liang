@@ -6,5 +6,7 @@
         <mapper resource="com/liang/mapper/xml/UserMapper.xml"/>
         <mapper resource="com/liang/mapper/xml/StudentMapper.xml"/>
         <mapper resource="com/liang/mapper/xml/TeacherMapper.xml"></mapper>
+        <mapper resource="com/liang/mapper/xml/OrderCustomMapper.xml"></mapper>
+        <mapper resource="com/liang/mapper/xml/test.xml"></mapper>
     </mappers>
 </configuration>
