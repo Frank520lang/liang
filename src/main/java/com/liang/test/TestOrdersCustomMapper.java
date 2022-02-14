@@ -22,4 +22,12 @@ public class TestOrdersCustomMapper {
         System.out.println(list);
 
     }
+    //
+    @Test
+    public void TestFindOrdersUserByResultMap(){
+        //List list=ordersCustomMapper.findOrdersUser();
+        List list=ordersCustomMapper.findOrdersUserByResultMap();
+        System.out.println(list);
+
+    }
 }
