@@ -30,4 +30,11 @@ public class TestOrdersCustomMapper {
         System.out.println(list);
 
     }
+    @Test
+    public void TestFindOrdersAndOrderDetailResultMap(){
+        //List list=ordersCustomMapper.findOrdersUser();
+        List list=ordersCustomMapper.findOrdersAndOrderDetailResultMap();
+        System.out.println(list);
+
+    }
 }
