@@ -12,7 +12,7 @@ public class Orders {
     //用户信息
     private User user;
     private String number;
-    private Date createtime;
+    private Date createTime;
     private String note;
     //订单详细
     private List<OrderDetail> orderDetails;

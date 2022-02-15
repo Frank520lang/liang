@@ -13,5 +13,5 @@ public class User {
     private String sex;
     private String address;
     //用户创建的订单列表
-    private List orderList;
+    private List<Orders> orderList;
 }

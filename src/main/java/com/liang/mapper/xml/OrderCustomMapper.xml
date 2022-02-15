@@ -1,11 +1,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <!-- namespace命名空间,作用就是对sql进行分类化的管理,理解为sql隔离
 注意:使用mapper代理开发时，namespace有特殊作用,namespace等于mapper接口地址
 -->
-<!--对应的mapper接口名字-->
+
+<!--对应的mapper接口名字,一個xml文件對應一個mapper接口-->
 <mapper namespace="com.liang.mapper.OrdersCustomMapper">
+
+<!--    一对一-->
     <!-- 查询订单，关联查询用户信息 -->
 <!--    id对应的接口名字，resultType对应的返回值,返回值为<泛型的类型>-->
     <select id="findOrdersUser" resultType="com.liang.wrapper.OrdersCustom">
@@ -18,4 +22,127 @@ orders t1,
 t_user t2
 WHERE t1.user_id=t2.id
 </select>
+
+<!--    一对一，resultMap的形式-->
+    <select id="findOrdersUserByResultMap" resultMap="OrdersUserResultMap">
+SELECT t1.*,
+t2.username,
+t2.sex,
+t2.address
+FROM
+orders t1,
+t_user t2
+WHERE t1.user_id=t2.id
+    </select>
+<!--    id對應的resultMap名稱，type對應查詢結果映射到的對象-->
+    <resultMap id="OrdersUserResultMap" type="com.liang.entity.Orders">
+<!--        column數據庫對應的字段，property是Orders類對應的屬性-->
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="note" property="note"></result>
+<!--        association:用于映射关联查询单个对象的信息-->
+<!--        JavaType表示映射到对象-->
+        <association property="user" javaType="com.liang.entity.User">
+            <id column="user_id" property="id"></id>
+            <result column="username" property="userName"></result>
+            <result column="sex" property="sex"></result>
+            <result column="address" property="address"></result>
+        </association>
+    </resultMap>
+
+<!--    一对多-->
+    <!--一对多，多对一是表与表之间的对应关系
+    如一个订单表有多个订单id，每个订单id都对应一个订单详情
+    此时订单表与订单详情表的对应关系就是 一对多，一张表对应多张表
+
+    -->
+<select id="findOrdersAndOrderDetailResultMap" resultMap="OrdersAndOrderDetail">
+select o.*,
+       t.address,
+       t.sex,
+       t.username,
+       l.id orderdetail_id,
+       l.orders_id,
+       l.items_id,
+       l.items_num
+from
+     t_user t,
+     orders o,
+     orderdetail l
+where t.id=o.user_id and l.orders_id=o.id
+</select>
+    <resultMap id="OrdersAndOrderDetail" type="com.liang.entity.Orders">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="note" property="note"></result>
+<!--        对关联查询到的多条记录映射到对象中-->
+        <association property="user" javaType="com.liang.entity.User">
+            <id column="user_id" property="id"></id>
+            <result column="address" property="address"></result>
+            <result column="sex" property="sex"></result>
+            <result column="username" property="userName"></result>
+        </association>
+<!--        对关联查询到的多条记录映射到集合中-->
+        <collection property="orderDetails" ofType="com.liang.entity.OrderDetail">
+            <id column="orderdetail_id" property="id"></id>
+            <result column="orders_id" property="ordersId"></result>
+            <result column="items_id" property="itemsId"></result>
+            <result column="items_num" property="itemsNum"></result>
+        </collection>
+    </resultMap>
+
+
+<!--    多对多-->
+<select id="findUserAndItemsResultMap" resultMap="UserAndItemsResultMap">
+select o.*,
+       t.address user_address,
+       t.sex user_sex,
+       t.username user_username,
+       l.id orderdetail_id,
+       l.orders_id,
+       l.items_id,
+       l.items_num,
+       i.id items_id,
+       i.createtime items_createtime,
+       i.detail items_detail,
+       i.itemsname items_name,
+       i.pic items_pic,
+       i.price items_price
+from
+     t_user t,
+     orders o,
+     orderdetail l,
+     items i
+where t.id=o.user_id and l.orders_id=o.id and i.id=l.items_id
+</select>
+    <resultMap id="UserAndItemsResultMap" type="com.liang.entity.User">
+        <id column="user_id" property="id"></id>
+        <result column="user_address" property="address"></result>
+        <result column="user_sex" property="sex"></result>
+        <result column="user_username" property="userName"></result>
+        <collection property="orderList" ofType="com.liang.entity.Orders">
+            <id column="id" property="id"></id>
+            <result column="number" property="number"></result>
+            <result column="createtime" property="createTime"></result>
+            <result column="note" property="note"></result>
+            <collection property="orderDetails" ofType="com.liang.entity.OrderDetail">
+                <id column="orderdetail_id" property="id"></id>
+                <result column="orders_id" property="ordersId"></result>
+                <result column="items_id" property="itemsId"></result>
+                <result column="items_num" property="itemsNum"></result>
+                <association property="items" javaType="com.liang.entity.Items">
+                    <id column="items_id" property="id"></id>
+                    <result column="items_createtime" property="createTime"></result>
+                    <result column="items_detail" property="detail"></result>
+                    <result column="items_name" property="itemsName"></result>
+                    <result column="items_pic" property="pic"></result>
+                    <result column="items_price" property="price"></result>
+                </association>
+            </collection>
+        </collection>
+    </resultMap>
 </mapper>

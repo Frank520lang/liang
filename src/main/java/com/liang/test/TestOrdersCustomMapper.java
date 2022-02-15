@@ -37,4 +37,11 @@ public class TestOrdersCustomMapper {
         System.out.println(list);
 
     }
+    @Test
+    public void TestFindUserAndItemsResultMap(){
+        //List list=ordersCustomMapper.findOrdersUser();
+        List list=ordersCustomMapper.findUserAndItemsResultMap();
+        System.out.println(list);
+
+    }
 }
